@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { brandConfig } from "../../../../brand.config";
 import { Loader2 } from "lucide-react";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect") || "/";
@@ -42,59 +42,67 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 flex justify-center">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">{brandConfig.logoText}</CardTitle>
-          <CardDescription>Hesabiniza giris yapin</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && (
-              <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md">
-                {error}
-              </div>
-            )}
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="ornek@email.com"
-                required
-              />
+    <Card className="w-full max-w-md">
+      <CardHeader className="text-center">
+        <CardTitle className="text-2xl">{brandConfig.logoText}</CardTitle>
+        <CardDescription>Hesabiniza giris yapin</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && (
+            <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md">
+              {error}
             </div>
-            <div>
-              <Label htmlFor="password">Sifre</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Sifreniz"
-                required
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Giris Yap
-            </Button>
-          </form>
-          <p className="text-center text-sm text-gray-500 mt-4">
-            Hesabiniz yok mu?{" "}
-            <Link href="/kayit" className="text-primary hover:underline font-medium">
-              Kayit Ol
-            </Link>
-          </p>
-          <div className="mt-4 p-3 bg-gray-50 rounded-md text-xs text-gray-500">
-            <p className="font-medium mb-1">Demo Hesaplar:</p>
-            <p>Admin: admin@modavitrin.com / admin123</p>
-            <p>Musteri: musteri@example.com / musteri123</p>
+          )}
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="ornek@email.com"
+              required
+            />
           </div>
-        </CardContent>
-      </Card>
+          <div>
+            <Label htmlFor="password">Sifre</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Sifreniz"
+              required
+            />
+          </div>
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Giris Yap
+          </Button>
+        </form>
+        <p className="text-center text-sm text-gray-500 mt-4">
+          Hesabiniz yok mu?{" "}
+          <Link href="/kayit" className="text-primary hover:underline font-medium">
+            Kayit Ol
+          </Link>
+        </p>
+        <div className="mt-4 p-3 bg-gray-50 rounded-md text-xs text-gray-500">
+          <p className="font-medium mb-1">Demo Hesaplar:</p>
+          <p>Admin: admin@modavitrin.com / admin123</p>
+          <p>Musteri: musteri@example.com / musteri123</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <div className="container mx-auto px-4 py-16 flex justify-center">
+      <Suspense fallback={<div className="text-center py-16"><Loader2 className="animate-spin mx-auto" /></div>}>
+        <LoginForm />
+      </Suspense>
     </div>
   );
 }

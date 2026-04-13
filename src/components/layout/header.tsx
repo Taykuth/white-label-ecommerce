@@ -118,7 +118,7 @@ export function Header() {
             {/* User menu */}
             {session ? (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger>
                   <button className="flex items-center gap-1 p-2 hover:bg-gray-100 rounded-full transition-colors">
                     <User size={20} />
                     <ChevronDown size={14} className="hidden sm:block" />
@@ -129,20 +129,20 @@ export function Header() {
                     {session.user.name}
                   </div>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem>
                     <Link href="/hesabim">
                       <User className="mr-2 h-4 w-4" />
                       Hesabim
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
+                  <DropdownMenuItem>
                     <Link href="/hesabim/siparisler">
                       <Package className="mr-2 h-4 w-4" />
                       Siparislerim
                     </Link>
                   </DropdownMenuItem>
                   {session.user.role === "ADMIN" && (
-                    <DropdownMenuItem asChild>
+                    <DropdownMenuItem>
                       <Link href="/admin">
                         <Settings className="mr-2 h-4 w-4" />
                         Yonetim Paneli
