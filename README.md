@@ -1,6 +1,6 @@
 # White-Label E-Ticaret Platformu
 
-Firmalara ve markalara özel, tek kod tabanından yönetilen, Türk pazarına uyumlu modern bir e-ticaret platformu. Bir müşteriye satacağınız site için yalnızca `brand.config.ts` dosyasını düzenleyip admin panelinden ürünleri eklemeniz yeterli; kod değiştirmeden yeni marka kurulumu yapılabilir.
+Firmalara ve markalara özel, tek kod tabanından yönetilen, Türk pazarına uyumlu modern bir e-ticaret platformu.
 
 Demo marka: **ModaVitrin**
 
@@ -59,18 +59,6 @@ npm run seed
 npm run dev
 ```
 
-### Demo Hesaplar
-
-| Rol | Email | Şifre |
-|-----|-------|-------|
-| Admin | `admin@modavitrin.com` | `admin123` |
-| Müşteri | `musteri@example.com` | `musteri123` |
-
-### Önemli Adresler
-
-- Mağaza: http://localhost:3000
-- Yönetim Paneli: http://localhost:3000/admin
-- Giriş: http://localhost:3000/giris
 
 ---
 
